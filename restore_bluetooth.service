@@ -1,0 +1,25 @@
+[Unit]
+
+Description=restore_bluetooth
+
+ 
+
+[Service]
+
+Type=simple
+
+PIDFile=/run/restore_bluetooth.pid
+
+#EnvironmentFile=/etc/systemd/test.conf
+
+ExecStart=/usr/bin/bash -c "/opt/systemd-sh/restore_bluetooth.sh"
+
+ExecReload=/bin/kill -SIGHUP $MAINPID
+
+ExecStop=/bin/kill -SIGINT $MAINPID
+
+ 
+
+[Install]
+
+WantedBy=multi-user.target graphical.target

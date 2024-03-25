@@ -1,4 +1,4 @@
-1、复制bluetooth.service 到 /lib/systemd/system
+1、复制restore_bluetooth.service 到 /lib/systemd/system
 
 2、cd ~
 
