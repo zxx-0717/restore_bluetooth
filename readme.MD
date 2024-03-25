@@ -8,8 +8,11 @@
 
 5、sudo mkdir systemd-sh
 
-6、复制 bluetooth_restore.sh 到 /opt/systemd-sh
+6、复制restore_bluetooth.sh 到 /opt/systemd-sh
 
 7、sudo systemctl enable bluetooth.service
 
 8、reboot
+
+9、修改时区为英国
+
