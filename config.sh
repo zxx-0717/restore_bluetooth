@@ -47,11 +47,11 @@ else
 fi
 
 echo pwd | sudo -S mkdir -p /opt/systemd-sh
-echo pwd | sudo -S cp ./resotre_bluetooth.sh /opt/systemd-sh/resotre_bluetooth.sh
+echo pwd | sudo -S cp ./restore_bluetooth.sh /opt/systemd-sh/resotre_bluetooth.sh
 if [ $? == 0 ]; then
-    echo "成功复制文件restore_bluetooth.sh"
+    echo "成功复制文件 restore_bluetooth.sh "
 else
-    echo "复制文件restore_bluetooth.sh失败"
+    echo "复制文件 restore_bluetooth.sh 失败"
     success=0
 fi
 
@@ -59,14 +59,14 @@ echo pwd | sudo -S systemctl daemon-reload
 echo pwd | sudo -S systemctl enable restore_bluetooth.service
 echo pwd | sudo -S systemctl start restore_bluetooth.service
 if [ $? == 0 ]; then
-    echo "成功开启restore_bluetooth服务开机自启功能"
+    echo "成功开启 restore_bluetooth 服务开机自启功能"
 else
-    echo "开启restore_bluetooth服务开机自启功能失败"
+    echo "开启 restore_bluetooth 服务开机自启功能失败"
     success=0
 fi
 
 if [ success --eq 1 ]; then
     pause "自动配置已完成, 重启电脑后生效"
 else
-    pause "自动配置未成功，请参考手动模式
+    pause "自动配置未成功，请参考手动模式"
 fi
