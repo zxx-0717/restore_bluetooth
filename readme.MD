@@ -10,9 +10,10 @@
 
 6、复制restore_bluetooth.sh 到 /opt/systemd-sh
 
-7、sudo systemctl enable bluetooth.service
+7、sudo systemct damon-reload
 
-8、reboot
+8、sudo systemctl enable restore_bluetooth.service
 
-9、修改时区为英国
+9、reboot
+
 
