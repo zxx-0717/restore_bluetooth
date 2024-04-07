@@ -1,3 +1,6 @@
+# pwd修改为系统root密码
+pwd="tj2022"
+
 function get_char()
 {
 	SAVEDSTTY=`stty -g`
@@ -25,7 +28,6 @@ function pause()
 	fi
 }
 
-pwd="tj2022"
 success=1
 
 mkdir -p /home/tj2022/logs_bluetooth_restore
@@ -55,6 +57,7 @@ fi
 
 echo pwd | sudo -S systemctl daemon-reload
 echo pwd | sudo -S systemctl enable restore_bluetooth.service
+echo pwd | sudo -S systemctl start restore_bluetooth.service
 if [ $? == 0 ]; then
     echo "成功开启restore_bluetooth服务开机自启功能"
 else
