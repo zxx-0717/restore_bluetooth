@@ -38,7 +38,7 @@ else
     success=0
 fi
 
-echo pwd | sudo -S cp ./restore_bluetooth.service /lib/systemd/system/restore_bluetooth.service
+echo $pwd | sudo -S cp ./restore_bluetooth.service /lib/systemd/system/restore_bluetooth.service
 if [ $? == 0 ]; then
     echo "成功复制文件restore_bluetooth.service"
 else
@@ -46,8 +46,8 @@ else
     success=0
 fi
 
-echo pwd | sudo -S mkdir -p /opt/systemd-sh
-echo pwd | sudo -S cp ./restore_bluetooth.sh /opt/systemd-sh/resotre_bluetooth.sh
+echo $pwd | sudo -S mkdir -p /opt/systemd-sh
+echo $pwd | sudo -S cp ./restore_bluetooth.sh /opt/systemd-sh/restore_bluetooth.sh
 if [ $? == 0 ]; then
     echo "成功复制文件 restore_bluetooth.sh "
 else
@@ -55,9 +55,9 @@ else
     success=0
 fi
 
-echo pwd | sudo -S systemctl daemon-reload
-echo pwd | sudo -S systemctl enable restore_bluetooth.service
-echo pwd | sudo -S systemctl start restore_bluetooth.service
+echo $pwd | sudo -S systemctl daemon-reload
+echo $pwd | sudo -S systemctl enable restore_bluetooth.service
+echo $pwd | sudo -S systemctl start restore_bluetooth.service
 if [ $? == 0 ]; then
     echo "成功开启 restore_bluetooth 服务开机自启功能"
 else
