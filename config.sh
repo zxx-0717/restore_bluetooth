@@ -47,11 +47,28 @@ else
 fi
 
 echo $pwd | sudo -S mkdir -p /opt/systemd-sh
+
 echo $pwd | sudo -S cp ./restore_bluetooth.sh /opt/systemd-sh/restore_bluetooth.sh
 if [ $? == 0 ]; then
     echo "成功复制文件 restore_bluetooth.sh "
 else
     echo "复制文件 restore_bluetooth.sh 失败"
+    success=0
+fi
+
+echo $pwd | sudo -S cp ./reboot_robot_num.txt /opt/systemd-sh/reboot_robot_num.txt
+if [ $? == 0 ]; then
+    echo "成功复制文件 reboot_robot_num.txt "
+else
+    echo "复制文件 reboot_robot_num.txt 失败"
+    success=0
+fi
+
+echo $pwd | sudo -S chmod 0777 /opt/systemd-sh/reboot_robot_num.txt
+if [ $? == 0 ]; then
+    echo "成功修改文件权限 0777 reboot_robot_num.txt "
+else
+    echo "修改文件权限 0777 失败 reboot_robot_num.txt 失败"
     success=0
 fi
 
