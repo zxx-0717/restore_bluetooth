@@ -7,8 +7,8 @@ echo ""
 
 
 bluetooth_controller="tj2022-DEFAULT-STRING"
-charger_bluetooth_name="ai-thinker2"
-time_interval=60
+charger_bluetooth_name="ai-thinker"
+time_interval=120
 
 restart_core_num_max=2
 restart_core_num=0
@@ -19,7 +19,10 @@ reboot_robot_num_last=$reboot_robot_num
 while true;
 do
     echo '------------------------------------------------------'
-    if cat /home/tj2022/map/core_restart.txt | grep -q 1 ; then 
+    if cat /home/tj2022/map/core_restart.txt | grep -q 1 ; then
+        echo $(date)" --- In monitoring state. sleep ${time_interval} seconds first, waiting for bluetooth to be connected......" | tee -a $log_file_name
+        sleep $time_interval
+        echo $(date)" --- Begin to check bluetooth state ......" | tee -a $log_file_name
         if hciconfig -a | grep -iq $bluetooth_controller;then
             if bluetoothctl devices | grep -iq $charger_bluetooth_name;then
                 str_output=$(date)" === normal"
@@ -39,11 +42,12 @@ do
             restart_core_num=$((restart_core_num + 1))
         fi
     else
-        echo $(date)" --- not in monitoring state." | tee -a $log_file_name
+        echo $(date)" --- Not in monitoring state." | tee -a $log_file_name
         restart_core_num=0
         reboot_robot_num=0
         reboot_robot_num_last=0
         echo 'tj2022' | sudo -S echo $reboot_robot_num > /opt/systemd-sh/reboot_robot_num.txt
+        sleep $time_interval
     fi
 
     if [ $restart_core_num -gt 0 ]; then
@@ -72,7 +76,6 @@ do
         fi
     fi
 
-    sleep $time_interval
 done
 
 
