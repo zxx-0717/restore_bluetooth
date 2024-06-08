@@ -52,6 +52,13 @@ do
 
     if [ $restart_core_num -gt 0 ]; then
         if [ $restart_core_num -le $restart_core_num_max ]; then
+	    echo "tj2022" | sudo -S rmmod btusb
+	    sleep 1
+	    echo "tj2022" | sudo -S modprobe btusb
+	    echo "tj2022" | sudo -S sudo systemctl restart bluetooth.service
+	    echo "tj2022" | sudo bluetoothctl power off
+	    echo "tj2022" | sudo bluetoothctl power on
+            
             docker compose -f /home/tj2022/docker-compose.yml restart core
             str_output=$(date)" ===  restart core "
             echo ${str_output} | tee -a $log_file_name
