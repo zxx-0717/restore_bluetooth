@@ -21,6 +21,14 @@ do
             else
                 str_output=$(date)" === restore bluetooth for reason: cann't find ${charger_bluetooth_name} bluetooth"
                 echo ${str_output} | tee -a $log_file_name
+                echo $pwd | sudo -S systemctl restart bluetooth
+                echo $pwd | sudo -S hciconfig hci0 down
+                echo $pwd | sudo -S hciconfig hci0 up
+                echo $pwd | sudo -S rfkill unblock all
+                echo $pwd | sudo -S rmmod btusb
+                echo $pwd | sudo -S rmmod btintel
+                echo $pwd | sudo -S modprobe btintel
+                echo $pwd | sudo -S modprobe btusb
                 docker compose -f /home/tj2022/docker-compose.yml restart core
             fi
         else
