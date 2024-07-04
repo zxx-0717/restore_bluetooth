@@ -50,7 +50,14 @@ do
             str_output=$(date)" === exec modprobe btusb"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S modprobe btusb
-            docker compose -f /home/tj2022/docker-compose.yml restart core
+
+            # str_output=$(date)" === exec docker compose -f /home/tj2022/docker-compose.yml restart core"
+            # echo ${str_output} | tee -a $log_file_name
+            # timeout 15 docker compose -f /home/tj2022/docker-compose.yml restart core
+
+            str_output=$(date)" === exec echo 0 to /home/tj2022/map/bluetooth_restore.txt"
+            echo ${str_output} | tee -a $log_file_name
+            timeout 3 echo 0 > /home/tj2022/map/bluetooth_restore.txt
         else
             str_output=$(date)" === normal"
             echo ${str_output} | tee -a $log_file_name
