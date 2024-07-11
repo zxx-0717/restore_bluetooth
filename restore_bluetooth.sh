@@ -11,6 +11,10 @@ charger_bluetooth_name="ai-thinker"
 time_interval=60
 pwd="tj2022"
 
+str_output=$(date)" === sleep 20s for waiting device/service to be ready"
+echo ${str_output} | tee -a $log_file_name
+sleep 20
+
 while true;
 do
     if cat /home/tj2022/map/core_restart.txt | grep -q 1 ; then 
