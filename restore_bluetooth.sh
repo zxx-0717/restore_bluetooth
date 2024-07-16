@@ -59,6 +59,10 @@ do
             # echo ${str_output} | tee -a $log_file_name
             # timeout 15 docker compose -f /home/tj2022/docker-compose.yml restart core
 
+            str_output=$(date)" === sleep 5s for waiting device/service/module to be ready"
+            echo ${str_output} | tee -a $log_file_name
+            sleep 5
+            
             str_output=$(date)" === exec echo 0 to /home/tj2022/map/bluetooth_restore.txt"
             echo ${str_output} | tee -a $log_file_name
             timeout 3 echo 0 > /home/tj2022/map/bluetooth_restore.txt
