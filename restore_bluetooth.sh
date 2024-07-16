@@ -15,6 +15,10 @@ str_output=$(date)" === sleep 20s for waiting device/service to be ready"
 echo ${str_output} | tee -a $log_file_name
 sleep 20
 
+str_output=$(date)" === set volume value 70% for MK6/7 robots"
+echo ${str_output} | tee -a $log_file_name
+pactl set-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo 70%
+
 while true;
 do
     if cat /home/tj2022/map/core_restart.txt | grep -q 1 ; then 
