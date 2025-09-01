@@ -27,33 +27,43 @@ do
             echo ${str_output} | tee -a $log_file_name
             timeout 10 echo $pwd | sudo -S systemctl restart bluetooth
 
-            str_output=$(date)" === exec hciconfig hci0 down"
-            echo ${str_output} | tee -a $log_file_name
-            timeout 5 echo $pwd | sudo -S hciconfig hci0 down
+            sleep 1 # wait for bluetooth service to up
+            DEVICE=$(hcitool dev | awk 'NR==2{print $1}')
 
-            str_output=$(date)" === exec hciconfig hci0 up"
+            str_output="$(date) === exec hciconfig \"$DEVICE\" down"
             echo ${str_output} | tee -a $log_file_name
-            timeout 5 echo $pwd | sudo -S hciconfig hci0 up
+            timeout 5 echo $pwd | sudo -S hciconfig $DEVICE down
+            sleep 1 
+
+            str_output="$(date) === exec hciconfig \"$DEVICE\" up"
+            echo ${str_output} | tee -a $log_file_name
+            timeout 5 echo $pwd | sudo -S hciconfig $DEVICE up
+            sleep 1
 
             str_output=$(date)" === exec rfkill unblock all"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S rfkill unblock all
+            sleep 1
 
             str_output=$(date)" === exec rmmod btusb"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S rmmod btusb
+            sleep 1
 
             str_output=$(date)" === exec rmmod btintel"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S rmmod btintel
+            sleep 1
 
             str_output=$(date)" === exec modprobe btintel"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S modprobe btintel
+            sleep 1
 
             str_output=$(date)" === exec modprobe btusb"
             echo ${str_output} | tee -a $log_file_name
             timeout 5 echo $pwd | sudo -S modprobe btusb
+            sleep 1
 
             # str_output=$(date)" === exec docker compose -f /home/tj2022/docker-compose.yml restart core"
             # echo ${str_output} | tee -a $log_file_name
