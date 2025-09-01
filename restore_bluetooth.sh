@@ -27,7 +27,7 @@ do
             echo ${str_output} | tee -a $log_file_name
             timeout 10 echo $pwd | sudo -S systemctl restart bluetooth
 
-            sleep 1 # wait for bluetooth service to up
+            sleep 2 # wait for bluetooth service to up
             DEVICE=$(hcitool dev | awk 'NR==2{print $1}')
 
             str_output="$(date) === exec hciconfig \"$DEVICE\" down"
