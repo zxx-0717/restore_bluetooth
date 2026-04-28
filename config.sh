@@ -83,7 +83,7 @@ else
 fi
 
 if [ $success -eq 1 ]; then
-    pause "自动配置已完成, 重启电脑后生效"
+    pause "自动配置已完成"
 else
     pause "自动配置未成功，请参考手动模式"
 fi
